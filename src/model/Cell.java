@@ -19,6 +19,10 @@ public abstract class Cell {
 		this.burnTimeCounter = 0;
 	}
 	
+	public int getBurnTime() {
+		return burnTimeCounter;
+	}
+	
 	
 	public abstract void updateState(Cell[] neighbors, int burnTime, double spreadProbability);
 	public abstract boolean canSpreadFire();

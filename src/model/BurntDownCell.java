@@ -4,8 +4,9 @@ package model;
  * 
  * @author Anthony Mozloom
  * 
- * This class represents the edge cells
- *  These cells do not change
+ * This class represents the Burnt-Down cell
+ * 
+ * These cells do not change
  * 
  * */
 
