@@ -14,6 +14,7 @@ public class EdgeCell extends Cell{
 	
 	public EdgeCell() {
 		super();
+		canCatchFire = false;
 	}
 	
 	// This cell does not change 

@@ -16,6 +16,7 @@ public class LiveTreeCell extends Cell {
 	
 	public LiveTreeCell() {
 		super();
+		canCatchFire = true;
 	}
 	
 	@Override

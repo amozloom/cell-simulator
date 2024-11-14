@@ -13,6 +13,7 @@ package model;
 public abstract class Cell {
 	
 	protected int burnTimeCounter;
+	protected boolean canCatchFire;
 	
 	
 	public Cell() {
