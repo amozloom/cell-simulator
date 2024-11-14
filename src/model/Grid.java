@@ -2,6 +2,8 @@ package model;
 
 import java.util.Random;
 
+import controller.InitializeCellStates;
+
 
 /* 
  * 
@@ -15,6 +17,7 @@ import java.util.Random;
  * */
 
 public class Grid {
+	
 	
 	private final int EDGE_ROWS = 2;
 	private final int EDGE_COLS = 2;
@@ -47,7 +50,7 @@ public class Grid {
         initializeGrid();
     }
 
-    private void initializeGrid() {
+    public void initializeGrid() {
         cells = new Cell[numRows][numCols];
         Random random = new Random();
         
@@ -81,7 +84,7 @@ public class Grid {
     }
     
     private void addBurningTrees(Random random) {
-    	int row = random.nextInt(numRows);;
+    	int row = random.nextInt(numRows);
     	int col = random.nextInt(numCols);
     	int burningTrees = initialBurningTrees;
     	
@@ -138,7 +141,35 @@ public class Grid {
         return cells;
     }
     
+    public Cell getCell(int row, int col) {
+    	return cells[row][col];
+    }
+    
     public void resetGrid() {
     	initializeGrid();
     }
+    
+    public void printGrid() {
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                System.out.print(cells[i][j].getClass().getSimpleName() + " ");
+            }
+            System.out.println();
+        }
+        System.out.println(); // Extra line for readability between updates
+    }
+    
+    public int getNumRows() {
+    	return this.numRows;
+    }
+    
+    
+    public int getNumCols() {
+    	return this.numCols;
+    }
+    
+    
+    
+    
+    
 }

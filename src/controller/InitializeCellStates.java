@@ -14,12 +14,17 @@ public class InitializeCellStates {
 	private double forestDensity;
 	private double numberOfBurningTrees;
 	
+	private int numRows;
+	private int numCols;
+	
 	
 	public InitializeCellStates() {
 		this.burnTime = 1;
 		this.spreadProbability = 0.4;
 		this.forestDensity = 1;
 		this.numberOfBurningTrees = 1;
+		this.numRows = 8;
+		this.numCols = 3;
 	}
 	
 	
@@ -30,18 +35,38 @@ public class InitializeCellStates {
 	        System.out.println("Hello, welcome to our wildfire simulator\n"
 	                + "Please start by entering the variable values for your\n"
 	                + "desired simulation");
-
+	        
+	        try {
+	        //Get height
+	        System.out.println("Grid Width:");
+	        this.numRows = scanner.nextInt();
+	        
+	        //Get width
+	        System.out.println("Grid Height:");
+	        this.numCols = scanner.nextInt();
+	        
+	        
 	        // Get burn time
-	        this.burnTime = getValidatedDoubleInput("Burn Time:");
+	        System.out.println("Burn Time:");
+	        this.burnTime = scanner.nextDouble();
 
 	        // Get spread probability
-	        this.spreadProbability = getValidatedDoubleInput("Spread Probability:");
+	        System.out.println("Spread Probability:");
+	        this.spreadProbability = scanner.nextDouble();
 
 	        // Get forest density
-	        this.forestDensity = getValidatedDoubleInput("Forest Density:");
+	        System.out.println("Forest Density:");
+	        this.forestDensity = scanner.nextDouble();
 
 	        // Get number of burning trees
-	        this.numberOfBurningTrees = getValidatedDoubleInput("Number of Burning Trees:");
+	        System.out.println("Number of Burning Trees:");
+	        this.numberOfBurningTrees = scanner.nextDouble();
+	        
+	        }catch(InputMismatchException e){
+	        	System.out.println("Invalid input. Please enter a numeric value.");
+                scanner.next();
+	        }
+	        
 
 	        System.out.println("Test values - Burn Time: " + this.burnTime + ", Spread Probability: " + this.spreadProbability
 	                + ", Forest Density: " + this.forestDensity + ", Number of Burning Trees: " + this.numberOfBurningTrees);
@@ -49,21 +74,6 @@ public class InitializeCellStates {
 	        scanner.close();
 	    }
 
-	    private double getValidatedDoubleInput(String prompt) {
-	        double input = 0;
-	        boolean valid = false;
-	        while (!valid) {
-	            System.out.println(prompt);
-	            try {
-	                input = scanner.nextDouble();
-	                valid = true;
-	            } catch (InputMismatchException e) {
-	                System.out.println("Invalid input. Please enter a numeric value.");
-	                scanner.next(); // Clear the invalid input
-	            }
-	        }
-	        return input;
-	    }
 	    
 	    
 	    
