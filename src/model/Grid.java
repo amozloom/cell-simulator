@@ -23,46 +23,29 @@ public class Grid {
     private int numCols;
     private double forestDensity;
     private int initialBurningTrees;
+    private int burnTime;
+    private double spreadProbability;
 
-    public Grid(int numRows, int numCols, double forestDensity, int initialBurningTrees) {
+    public Grid(int numRows, int numCols, double forestDensity, int initialBurningTrees, int burnTime, double spreadProbability) {
         this.numRows = numRows+EDGE_ROWS;
         this.numCols = numCols+EDGE_COLS;
         this.forestDensity = forestDensity;
         this.initialBurningTrees = initialBurningTrees;
-        cells = new Cell[numRows+EDGE_ROWS][numCols+EDGE_COLS];
-        //initializeGrid();
+        this.burnTime = burnTime;
+        this.spreadProbability = spreadProbability;
+        initializeGrid();
     }
 
     private void initializeGrid() {
-        cells = new Cell[numRows+EDGE_ROWS][numCols+EDGE_COLS];
+        cells = new Cell[numRows][numCols];
         Random random = new Random();
-
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numCols; j++) {
-                if (i == 0 || j == 0 || i == numRows - 1 || j == numCols - 1) {
-                    cells[i][j] = new EdgeCell();
-                } else {
-                    if (random.nextDouble() < forestDensity) {
-                        cells[i][j] = new LiveTreeCell();
-                    } else {
-                        cells[i][j] = new EmptyCell();
-                    }
-                }
-            }
-        }
-
-        for (int n = 0; n < initialBurningTrees; n++) {
-            int row, col;
-            do {
-                row = 1 + random.nextInt(numRows - 2);
-                col = 1 + random.nextInt(numCols - 2);
-            } while (!(cells[row][col] instanceof LiveTreeCell));
-            cells[row][col] = new BurningTreeCell(1);
-        }
+        
+        addEdgeCells();
+        populateActiveGrid(random);
+        addBurningTrees(random);
     }
     
-    public void addEdgeCells() {
-    	
+    private void addEdgeCells() {
     	for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
                 if (i == 0 || j == 0 || i == numRows - 1 || j == numCols - 1) {
@@ -72,7 +55,7 @@ public class Grid {
     	}
     }
     
-    public void populateActiveGrid(Random random) {
+    private void populateActiveGrid(Random random) {
     	for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
             	if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
@@ -86,29 +69,53 @@ public class Grid {
     	}
     }
     
+    private void addBurningTrees(Random random) {
+    	int row = random.nextInt(numRows);;
+    	int col = random.nextInt(numCols);
+    	int burningTrees = initialBurningTrees;
+    	
+    	while (burningTrees > 0) {
+    		if (cells[row][col].canCatchFire) {
+    			cells[row][col] = new BurningTreeCell(burnTime);
+    			burningTrees--;
+    		}
+    		row = random.nextInt(numRows);
+            col = random.nextInt(numCols);
+    	}
+    }
     
 
-    public void updateGrid(int burnTime, double spreadProbability) {
+    public void updateGrid() {
         Cell[][] newCells = new Cell[numRows][numCols];
 
-        for (int i = 1; i < numRows - 1; i++) {
-            for (int j = 1; j < numCols - 1; j++) {
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
                 Cell currentCell = cells[i][j];
-                Cell[] neighbors = getNeighbors(i, j);
                 
-                currentCell.updateState(neighbors, burnTime, spreadProbability);
-
-                if (currentCell instanceof LiveTreeCell && currentCell.getBurnTime() > 0) {
-                    newCells[i][j] = new BurningTreeCell(burnTime);
-                } else if (currentCell instanceof BurningTreeCell && currentCell.getBurnTime() <= 0) {
-                    newCells[i][j] = new BurntDownCell();
-                } else {
-                    newCells[i][j] = currentCell;
+                newCells[i][j] = currentCell;
+                
+                if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
+                	Cell[] neighbors = getNeighbors(i, j);
+                    currentCell.updateState(neighbors, burnTime, spreadProbability);
+                    updateLiveToBurn(currentCell, newCells, i, j);
+                    updateBurnToBurntDown(currentCell, newCells, i, j);
                 }
             }
         }
 
         cells = newCells;
+    }
+    
+    private void updateLiveToBurn(Cell cell, Cell[][] newCells, int i, int j) {
+    	if (cell.getBurnTime() > 0 && cell.canCatchFire) {
+    		newCells[i][j] = new BurningTreeCell(burnTime);
+    	}
+    }
+    
+    private void updateBurnToBurntDown(Cell cell, Cell[][] newCells, int i, int j) {
+    	if (cell.getBurnTime() == 0 && cell.canSpreadFire()) {
+    		newCells[i][j] = new BurntDownCell();
+    	}
     }
 
     private Cell[] getNeighbors(int row, int col) {

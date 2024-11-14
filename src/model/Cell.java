@@ -14,6 +14,7 @@ public abstract class Cell {
 	
 	protected int burnTimeCounter;
 	protected boolean canCatchFire;
+	protected String name;
 	
 	
 	public Cell() {
@@ -22,6 +23,14 @@ public abstract class Cell {
 	
 	public int getBurnTime() {
 		return burnTimeCounter;
+	}
+	
+	public boolean canCatchFire() {
+		return canCatchFire;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	
