@@ -7,9 +7,10 @@ import java.util.Random;
  * 
  * @author Anthony Mozloom
  * 
- * This class represents the 
+ * This class represents the Grid
  * 
- * 
+ * In this class the Grid is initialized with its parameters
+ * Cells are updated based on their neighbors and burn time
  * 
  * */
 
@@ -26,7 +27,17 @@ public class Grid {
     private int burnTime;
     private double spreadProbability;
 
-    public Grid(int numRows, int numCols, double forestDensity, int initialBurningTrees, int burnTime, double spreadProbability) {
+    public Grid(int numRows, int numCols) {
+    	this.numRows = numRows+EDGE_ROWS;
+        this.numCols = numCols+EDGE_COLS;
+        this.forestDensity = 1;
+        this.initialBurningTrees = 1;
+        this.burnTime = 1;
+        this.spreadProbability = 0.4;
+        initializeGrid();
+    }
+    
+    public Grid(int numRows, int numCols, int burnTime, double spreadProbability, double forestDensity, int initialBurningTrees) {
         this.numRows = numRows+EDGE_ROWS;
         this.numCols = numCols+EDGE_COLS;
         this.forestDensity = forestDensity;
@@ -83,15 +94,12 @@ public class Grid {
             col = random.nextInt(numCols);
     	}
     }
-    
 
     public void updateGrid() {
         Cell[][] newCells = new Cell[numRows][numCols];
-
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
                 Cell currentCell = cells[i][j];
-                
                 newCells[i][j] = currentCell;
                 
                 if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
@@ -102,7 +110,6 @@ public class Grid {
                 }
             }
         }
-
         cells = newCells;
     }
     
@@ -129,5 +136,9 @@ public class Grid {
 
     public Cell[][] getCells() {
         return cells;
+    }
+    
+    public void resetGrid() {
+    	initializeGrid();
     }
 }
