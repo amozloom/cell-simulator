@@ -16,6 +16,8 @@ public class BurningTreeCell extends Cell{
 	
 	public BurningTreeCell(int burnTime) {
 		burnTimeCounter = burnTime;
+		canCatchFire = false;
+		name = "Burn  ";
 	}
 	
 	@Override
