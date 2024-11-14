@@ -15,6 +15,7 @@ public class EmptyCell extends EdgeCell {
 	
 	public EmptyCell() {
 		super();
+		name = "Empty ";
 	}
 	
 	

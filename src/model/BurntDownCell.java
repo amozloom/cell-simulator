@@ -15,6 +15,7 @@ public class BurntDownCell extends EdgeCell {
 	
 	public BurntDownCell() {
 		super();
+		name = "Burnt ";
 	}
 	
 	
