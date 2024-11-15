@@ -17,9 +17,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Grid;
 import controller.ControlSimulationStates;
-import controller.InitializeCellStates;
+import controller.InitializeGridtates;
 
 //Reed Gatfield
+//Quincy Oldland
 public class WildfireView extends Application {
 	//GUI
 	private final int MILLISECOND_DELAY = 2000;
@@ -43,7 +44,7 @@ public class WildfireView extends Application {
 	@Override
 	public void start(Stage stage) {
 		//Initialize Simulation
-		InitializeCellStates initialStates = new InitializeCellStates();
+		InitializeGridtates initialStates = new InitializeGridtates();
 		simulationControls = new ControlSimulationStates();
 		colorCells = new ColorCells();
 		//Initialize grid with defaults.
@@ -53,7 +54,8 @@ public class WildfireView extends Application {
 				initialStates.getSpreadProbability(),
 				initialStates.getForestDensity(),
 				initialStates.getNumberOfBurningTrees());
-
+		
+		//setup the scene
 		myScene = setupScene();
 		stage.setScene(myScene);
 		stage.setTitle("Wildfire Simulation");
@@ -68,6 +70,7 @@ public class WildfireView extends Application {
 
 	//Sets up GUI components.
 	private Scene setupScene() {
+		//create a root with a default width and height
 		Group simulationDisplay = colorCells.createRootForDisplay(WINDOW_WIDTH, WINDOW_HEIGHT, 
 				grid.getNumCols(), grid.getNumRows());
 		HBox parameters = setupParameters();
@@ -112,12 +115,15 @@ public class WildfireView extends Application {
 		field.setPrefWidth(50);
 		return field;
 	}
-
+	
+	//setup the buttons gui, calling the methods from controller
 	private HBox setupControlButtons() {
+		//create an hbox to position buttons at bottom of the screen
 		HBox controls = new HBox();
 		controls.setAlignment(Pos.BASELINE_CENTER);
 		controls.setSpacing(10);
-
+		
+		//setup the layout for button, on click call the control method
 		Button newSimButton = new Button("New Simulation");
 		newSimButton.setOnAction(value -> createNewSimulation());
 		controls.getChildren().add(newSimButton);
@@ -135,7 +141,8 @@ public class WildfireView extends Application {
 
 		return controls;
 	}
-
+	
+	//create a new simulation with the variables gather from the text boxes
 	private void createNewSimulation() {
 		int rows = Integer.parseInt(rowsField.getText());
 		int cols = Integer.parseInt(colsField.getText());
@@ -147,16 +154,18 @@ public class WildfireView extends Application {
 		grid = new Grid(rows, cols, burnTime, spreadProb, forestDensity, burningTrees);
 		redraw();
 	}
-
+	
 	private void pressPause() {
 		this.paused = !this.paused;
 		pauseButton.setText(this.paused ? "Start" : "Pause");
 	}
 
+	//on every call of update display redraw each of the cells with there correct colors 
 	private void redraw() {
 		colorCells.updateDisplay(grid);
 	}
-
+	
+	//on every step, update the grid and color in the cells
 	private void step(double elapsedTime) {
 		if (!paused) {
 			simulationControls.step(grid);
