@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 /* 
  * 
  * @author Anthony Mozloom
@@ -13,6 +15,8 @@ package model;
 
 
 public class LiveTreeCell extends Cell {
+	
+	private Color color = Color.GREEN;
 	
 	public LiveTreeCell() {
 		super();
@@ -34,5 +38,10 @@ public class LiveTreeCell extends Cell {
 	@Override
 	public boolean canSpreadFire() {
 		return false;
+	}
+	
+	@Override
+	public Color getCellColor() {
+		return color;
 	}
 }

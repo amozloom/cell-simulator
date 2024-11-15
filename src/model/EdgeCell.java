@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 /* 
  * 
  * @author Anthony Mozloom
@@ -11,6 +13,8 @@ package model;
  * */
 
 public class EdgeCell extends Cell{
+	
+	private Color color = Color.BLACK;
 	
 	public EdgeCell() {
 		super();
@@ -28,5 +32,10 @@ public class EdgeCell extends Cell{
 	@Override
 	public boolean canSpreadFire() {
 		return false;
+	}
+	
+	@Override
+	public Color getCellColor() {
+		return color;
 	}
 }
