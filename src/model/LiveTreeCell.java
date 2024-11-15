@@ -24,6 +24,7 @@ public class LiveTreeCell extends Cell {
 		name = "Tree  ";
 	}
 	
+	// Initialize burnTimeCounter if tree catches on fire 
 	@Override
 	public void updateState(Cell[] neighbors, int burnTime, double spreadProbability) {
 		

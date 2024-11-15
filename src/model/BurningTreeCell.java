@@ -24,6 +24,7 @@ public class BurningTreeCell extends Cell{
 		name = "Burn  ";
 	}
 	
+	// Deincrement burnTimeCounter by one each step 
 	@Override
 	public void updateState(Cell[] neighbors, int burnTime, double spreadProbability) {
 		burnTimeCounter--;
