@@ -1,6 +1,7 @@
 package view;
 
 import javafx.animation.KeyFrame;
+
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Grid;
 import controller.ControlSimulationStates;
-import controller.InitializeGridtates;
+import controller.InitializeGridStates;
 
 //Reed Gatfield
 //Quincy Oldland
@@ -44,7 +45,7 @@ public class WildfireView extends Application {
 	@Override
 	public void start(Stage stage) {
 		//Initialize Simulation
-		InitializeGridtates initialStates = new InitializeGridtates();
+		InitializeGridStates initialStates = new InitializeGridStates();
 		simulationControls = new ControlSimulationStates();
 		colorCells = new ColorCells();
 		//Initialize grid with defaults.
