@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 /* 
  * 
  * @author Anthony Mozloom
@@ -13,6 +15,8 @@ package model;
 
 
 public class BurningTreeCell extends Cell{
+	
+	private Color color = Color.RED;
 	
 	public BurningTreeCell(int burnTime) {
 		burnTimeCounter = burnTime;
@@ -30,4 +34,10 @@ public class BurningTreeCell extends Cell{
 	public boolean canSpreadFire() {
 		return true;
 	}
+	
+	@Override
+	public Color getCellColor() {
+		return color;
+	}
+	
 }
