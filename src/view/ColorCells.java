@@ -29,7 +29,7 @@ public class ColorCells {
             for (int col = 0; col < grid.getNumCols(); col++) {
                 Cell cell = grid.getCell(row, col);
                 Rectangle rect = new Rectangle(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                rect.setFill(getColorForCell(cell));
+                rect.setFill(cell.getCellColor());
                 rect.setStroke(Color.BLACK);       
                 rect.setStrokeWidth(0.5);   
                 root.getChildren().add(rect);
@@ -37,12 +37,5 @@ public class ColorCells {
         }
     }
 
-    // Define cell colors based on their type
-    private Color getColorForCell(Cell cell) {
-        if (cell instanceof model.BurningTreeCell) return Color.RED;
-        if (cell instanceof model.LiveTreeCell) return Color.GREEN;
-        if (cell instanceof model.BurntDownCell) return Color.YELLOW;
-        if (cell instanceof model.EmptyCell) return Color.BROWN;
-        return Color.BLACK;  // Default color for EdgeCell or undefined cells
-    }
+  
 }

@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 /* 
  * 
  * @author Anthony Mozloom
@@ -13,9 +15,16 @@ package model;
 
 public class BurntDownCell extends EdgeCell {
 	
+	private Color color = Color.YELLOW;
+	
 	public BurntDownCell() {
 		super();
 		name = "Burnt ";
+	}
+	
+	@Override
+	public Color getCellColor() {
+		return color;
 	}
 	
 	

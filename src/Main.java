@@ -15,7 +15,7 @@ import view.ColorCells;
 public class Main extends Application {
 
     public final int SIZE = 600;
-    public final int FRAMES_PER_SECOND = 1 / 2;         // 0.5 frames per second
+  
     public final int MILLISECOND_DELAY = 2000;           // 2000 milliseconds delay for 2 seconds
     public final double SECOND_DELAY = 2.0;              // 2 seconds per step
     public final String TITLE = "Wildfire Simulation";
