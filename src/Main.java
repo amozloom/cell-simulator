@@ -1,4 +1,5 @@
 import controller.ControlSimulationStates;
+import controller.InitializeCellStates;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -14,9 +15,9 @@ import view.ColorCells;
 public class Main extends Application {
 
     public final int SIZE = 600;
-    public final int FRAMES_PER_SECOND = 10;
-    public final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-    public final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+    public final int FRAMES_PER_SECOND = 1 / 2;         // 0.5 frames per second
+    public final int MILLISECOND_DELAY = 2000;           // 2000 milliseconds delay for 2 seconds
+    public final double SECOND_DELAY = 2.0;              // 2 seconds per step
     public final String TITLE = "Wildfire Simulation";
     public final Paint BACKGROUND = Color.AZURE;
 
@@ -24,12 +25,21 @@ public class Main extends Application {
     private ControlSimulationStates simulationControls;
     private Grid grid;  
     private ColorCells view;  
+    private InitializeCellStates cellStates;
 
     @Override
     public void start(Stage stage) {
-        // Set up ColorCells and Grid for display and simulation control
+        //get user input for cell variables
+    	cellStates = new InitializeCellStates();
+    	cellStates.getUserInputForCellState();
+    	
+    	// Set up ColorCells and Grid for display and simulation control
         view = new ColorCells();
-        grid = new Grid(3,8);
+        //
+        grid = new Grid(cellStates.getNumberOfRows(), cellStates.getNumberOfColumns(),
+        		cellStates.getBurnTime(), cellStates.getSpreadProbability(),
+        		cellStates.getForestDensity(), cellStates.getNumberOfBurningTrees());
+        
         simulationControls = new ControlSimulationStates();
 
         // Create and display the scene
@@ -48,7 +58,8 @@ public class Main extends Application {
 
     private Scene setupScene(int width, int height, Paint background, ColorCells view, Grid grid, int rows, int cols) {
         Group root = view.createRootForDisplay(width, height, rows, cols);
-        view.updateDisplay(grid);  // Initial display setup
+        view.updateDisplay(grid);// Initial display setup
+        grid.printGrid();
         return new Scene(root, width, height, background);
     }
 

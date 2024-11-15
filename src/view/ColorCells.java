@@ -9,7 +9,7 @@ import model.Grid;
 public class ColorCells {
 
     private final int CELL_SIZE = 40;  // Size of each cell in pixels
-    private Group root;  // Persistent Group for cell display
+    private Group root;  // Group for cell display
     
     public Group createRootForDisplay(int sceneWidth, int sceneHeight, int numCols, int numRows) {
         root = new Group();

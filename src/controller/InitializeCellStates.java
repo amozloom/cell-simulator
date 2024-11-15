@@ -9,10 +9,10 @@ public class InitializeCellStates {
 	//Scanner to allow for user inputs
 	private Scanner scanner;
 	//Cell state variables 
-	private double burnTime;
+	private int burnTime;
 	private double spreadProbability;
 	private double forestDensity;
-	private double numberOfBurningTrees;
+	private int numberOfBurningTrees;
 	
 	private int numRows;
 	private int numCols;
@@ -38,17 +38,17 @@ public class InitializeCellStates {
 	        
 	        try {
 	        //Get height
-	        System.out.println("Grid Width:");
+	        System.out.println("Grid Rows:");
 	        this.numRows = scanner.nextInt();
 	        
 	        //Get width
-	        System.out.println("Grid Height:");
+	        System.out.println("Grid Columns:");
 	        this.numCols = scanner.nextInt();
 	        
 	        
 	        // Get burn time
 	        System.out.println("Burn Time:");
-	        this.burnTime = scanner.nextDouble();
+	        this.burnTime = scanner.nextInt();
 
 	        // Get spread probability
 	        System.out.println("Spread Probability:");
@@ -60,7 +60,7 @@ public class InitializeCellStates {
 
 	        // Get number of burning trees
 	        System.out.println("Number of Burning Trees:");
-	        this.numberOfBurningTrees = scanner.nextDouble();
+	        this.numberOfBurningTrees = scanner.nextInt();
 	        
 	        }catch(InputMismatchException e){
 	        	System.out.println("Invalid input. Please enter a numeric value.");
@@ -77,7 +77,7 @@ public class InitializeCellStates {
 	    
 	    
 	    
-	    public double getBurnTime() {
+	    public int getBurnTime() {
 	        return burnTime;
 	    }
 
@@ -89,7 +89,15 @@ public class InitializeCellStates {
 	        return forestDensity;
 	    }
 
-	    public double getNumberOfBurningTrees() {
+	    public int getNumberOfBurningTrees() {
 	        return numberOfBurningTrees;
+	    }
+	    
+	    public int getNumberOfColumns() {
+	    	return numCols;
+	    }
+	    
+	    public int getNumberOfRows() {
+	    	return numRows;
 	    }
 }
