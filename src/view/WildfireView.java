@@ -163,8 +163,4 @@ public class WildfireView extends Application {
 			redraw();
 		}
 	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
 }
