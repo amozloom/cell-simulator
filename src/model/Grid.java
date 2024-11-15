@@ -30,6 +30,7 @@ public class Grid {
     private int burnTime;
     private double spreadProbability;
 
+    // Starter Grid User sees before changing any parameters 
     public Grid(int numRows, int numCols) {
     	this.numRows = numRows+EDGE_ROWS;
         this.numCols = numCols+EDGE_COLS;
@@ -40,6 +41,7 @@ public class Grid {
         initializeGrid();
     }
     
+    // Grid that can update each parameter
     public Grid(int numRows, int numCols, int burnTime, double spreadProbability, double forestDensity, int initialBurningTrees) {
         this.numRows = numRows+EDGE_ROWS;
         this.numCols = numCols+EDGE_COLS;
@@ -50,6 +52,7 @@ public class Grid {
         initializeGrid();
     }
 
+    // Initializes Grid calling helper methods
     public void initializeGrid() {
         cells = new Cell[numRows][numCols];
         Random random = new Random();
@@ -59,6 +62,7 @@ public class Grid {
         addBurningTrees(random);
     }
     
+    // Adds edge cells to the outside of the grid
     private void addEdgeCells() {
     	for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
@@ -69,6 +73,7 @@ public class Grid {
     	}
     }
     
+    // Populates inside of the grid with Live Trees and Empty cells
     private void populateActiveGrid(Random random) {
     	for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
@@ -83,6 +88,7 @@ public class Grid {
     	}
     }
     
+    // Sets one of the created trees to start as burning
     private void addBurningTrees(Random random) {
     	int row = random.nextInt(numRows);
     	int col = random.nextInt(numCols);
@@ -98,6 +104,7 @@ public class Grid {
     	}
     }
 
+    // Updates one step of the grid
     public void updateGrid() {
         Cell[][] newCells = new Cell[numRows][numCols];
         for (int i = 0; i < numRows; i++) {
@@ -116,18 +123,21 @@ public class Grid {
         cells = newCells;
     }
     
+    // Updates Live trees to burn if they catch fire
     private void updateLiveToBurn(Cell cell, Cell[][] newCells, int i, int j) {
     	if (cell.getBurnTime() > 0 && cell.canCatchFire) {
     		newCells[i][j] = new BurningTreeCell(burnTime);
     	}
     }
     
+    // Updates burning trees to burn down if their burn timer expires
     private void updateBurnToBurntDown(Cell cell, Cell[][] newCells, int i, int j) {
     	if (cell.getBurnTime() == 0 && cell.canSpreadFire()) {
     		newCells[i][j] = new BurntDownCell();
     	}
     }
 
+    // Gets neighboring cells to update the grid each state
     private Cell[] getNeighbors(int row, int col) {
         return new Cell[]{
             cells[row - 1][col],
@@ -137,18 +147,22 @@ public class Grid {
         };
     }
 
+    // Returns grid 
     public Cell[][] getCells() {
         return cells;
     }
     
+    // Returns a cell from the grid
     public Cell getCell(int row, int col) {
     	return cells[row][col];
     }
     
+    // Resets grid with current parameters
     public void resetGrid() {
     	initializeGrid();
     }
     
+    // Prints grid for testing
     public void printGrid() {
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
@@ -159,17 +173,12 @@ public class Grid {
         System.out.println(); // Extra line for readability between updates
     }
     
+    // Methods to get size of grid 
     public int getNumRows() {
     	return this.numRows;
     }
-    
-    
     public int getNumCols() {
     	return this.numCols;
     }
-    
-    
-    
-    
     
 }

@@ -16,7 +16,7 @@ public abstract class Cell {
 	
 	protected int burnTimeCounter;
 	protected boolean canCatchFire;
-	protected String name;
+	protected String name; // Testing purpose only
 	
 	protected Color color;
 	
@@ -25,14 +25,17 @@ public abstract class Cell {
 		this.burnTimeCounter = 0;
 	}
 	
+	// Gets burn time of a cell 
 	public int getBurnTime() {
 		return burnTimeCounter;
 	}
 	
+	// Determines if a cell can catch fire or not
 	public boolean canCatchFire() {
 		return canCatchFire;
 	}
 	
+	// Testing method 
 	public String getName() {
 		return name;
 	}
