@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 /* 
  * 
  * @author Anthony Mozloom
@@ -15,6 +17,8 @@ public abstract class Cell {
 	protected int burnTimeCounter;
 	protected boolean canCatchFire;
 	protected String name;
+	
+	protected Color color;
 	
 	
 	public Cell() {
@@ -36,4 +40,5 @@ public abstract class Cell {
 	
 	public abstract void updateState(Cell[] neighbors, int burnTime, double spreadProbability);
 	public abstract boolean canSpreadFire();
+	public abstract Color getCellColor();
 }
