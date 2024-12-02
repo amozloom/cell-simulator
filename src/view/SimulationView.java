@@ -13,14 +13,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.FireWorldGrid;
 import model.Grid;
+import controller.ColorCellsForWildfire;
 import controller.ControlSimulationStates;
 
 /* 
  * 
- * @author Reed Gatfield
+ * @author Reed Gatfield, Quincy Oldland
  * 
- * Abstract class for simmulation views.
+ * Abstract class for simulation views.
  * 
  * */
 
@@ -34,18 +36,23 @@ public abstract class SimulationView extends Application {
     protected Scene myScene;
     protected boolean paused = true;
     protected Button pauseButton;
-    protected ColorCells colorCells;
+    protected ColorCellsForWildfire colorCells;
     protected Grid grid;
     protected ControlSimulationStates simulationControls;
     
     //Basic inputs all simulations need
     protected TextField rowsField;
     protected TextField colsField;
+    
+    public SimulationView() {
+    	initializeGrid();
+    }
+    
 
     @Override
     public void start(Stage stage) {
         simulationControls = new ControlSimulationStates();
-        colorCells = new ColorCells();
+        colorCells = new ColorCellsForWildfire();
         initializeGrid();  // Each subclass defines this
 
         myScene = setupScene();

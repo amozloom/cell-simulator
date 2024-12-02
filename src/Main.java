@@ -1,7 +1,8 @@
 import javafx.application.Application;
+
 import javafx.stage.Stage;
 import view.WildfireView;
-import view.WaterWorldView;
+//import view.WaterWorldView;
 import java.util.Scanner;
 
 /* 
@@ -26,8 +27,9 @@ public class Main extends Application {
             WildfireView fireView = new WildfireView();
             fireView.start(stage);
         } else if (choice == 2) {
-            WaterWorldView waterView = new WaterWorldView();
-            waterView.start(stage);
+//            WaterWorldView waterView = new WaterWorldView();
+//            waterView.start(stage);
+        	System.out.println("no");
         }
         
         scanner.close();
