@@ -6,7 +6,14 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.Cell;
-import model.Grid;
+
+/* 
+ * 
+ * @author Reed Gatfield
+ * 
+ * Updates cell colors in grids.
+ * 
+ * */
 
 public class ColorCells {
     private final int CELL_SIZE = 40;
@@ -43,11 +50,12 @@ public class ColorCells {
     	
     }
 
-    public void updateDisplay(Grid grid) {
-        root.getChildren().clear(); // Clear existing cells to refresh the display
+    public void updateDisplay(model.Grid grid) {
+        root.getChildren().clear();
 
         for (int row = 0; row < grid.getNumRows(); row++) {
             for (int col = 0; col < grid.getNumCols(); col++) {
+
                 int cellNumber = grid.getCell(row, col);
                 Rectangle cell = colorOneCell(cellNumber, row, col);
                 root.getChildren().add(cell);
@@ -69,4 +77,3 @@ public class ColorCells {
  }
     
     
-

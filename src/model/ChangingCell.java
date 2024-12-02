@@ -31,5 +31,5 @@ public abstract class ChangingCell extends Cell {
 		return canChangeStates;
 	}
 	
-	public abstract void updateState(Cell[] neighbors, int timer, double probability);
+	public abstract void updateState(int[] neighbors, int timer, double probability);
 }

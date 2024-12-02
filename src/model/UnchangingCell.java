@@ -14,23 +14,24 @@ import javafx.scene.paint.Color;
 
 
 public class UnchangingCell extends Cell{
-	
+
 	public UnchangingCell() {
 		canChangeStates = false;
 	}
-	
+
 	@Override
 	public int getTimer() {
 		return -1;
 	}
-	
+
 	@Override
 	public boolean canChangeStates() {
 		return canChangeStates;
 	}
-	
-	public void updateState(Cell[] neighbors, int timer, double probability) {
-		
+
+	public void updateState(int[] neighbors, int timer, double probability) {
+
 	}
-	
+
+
 }
