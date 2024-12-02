@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 //Quincy Oldland
 
-public class InitializeCellStates {
+public class InitializeGridStates {
 	//Scanner to allow for user inputs
 	private Scanner scanner;
 	//Cell state variables 
@@ -18,7 +18,7 @@ public class InitializeCellStates {
 	private int numCols;
 	
 	
-	public InitializeCellStates() {
+	public InitializeGridStates() {
 		this.burnTime = 1;
 		this.spreadProbability = 0.4;
 		this.forestDensity = 1;

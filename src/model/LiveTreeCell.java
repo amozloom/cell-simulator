@@ -15,12 +15,12 @@ import javafx.scene.paint.Color;
 
 
 public class LiveTreeCell extends ChangingCell {
-	
+
 	public LiveTreeCell() {
 		super();
 		timer = 0;
 	}
-	
+
 	// Initialize burnTimeCounter if tree catches on fire 
 	@Override
 	public void updateState(Cell[] neighbors, int burnTime, double spreadProbability) {
@@ -30,5 +30,10 @@ public class LiveTreeCell extends ChangingCell {
 			}
 		}
 	}
-	
+
+	@Override
+	public Color getColor() {
+		return Color.GREEN;
+	}
+
 }

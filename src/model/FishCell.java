@@ -8,6 +8,7 @@ package model;
  * 
  * */
 
+import javafx.scene.paint.Color;
 
 public class FishCell extends ChangingCell {
 	
@@ -20,4 +21,9 @@ public class FishCell extends ChangingCell {
 	public void updateState(Cell[] neighbors, int timer, double probability) {
 		//this.timer--;
 	}
+	
+	@Override
+    public Color getColor() {
+        return Color.BLUE;
+    }
 }
