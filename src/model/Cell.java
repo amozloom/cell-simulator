@@ -20,5 +20,4 @@ public abstract class Cell {
 	public abstract int getTimer();
 	public abstract void updateState(int[] neighbors, int timer, double probability);
 	
-	
 }

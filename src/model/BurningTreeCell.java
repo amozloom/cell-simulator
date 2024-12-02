@@ -27,5 +27,4 @@ public class BurningTreeCell extends LiveTreeCell{
 		timer--;
 	}
 
-
 }
