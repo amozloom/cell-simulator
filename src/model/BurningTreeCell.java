@@ -14,30 +14,17 @@ import javafx.scene.paint.Color;
  * */
 
 
-public class BurningTreeCell extends Cell{
-	
-	private Color color = Color.RED;
+public class BurningTreeCell extends LiveTreeCell{
 	
 	public BurningTreeCell(int burnTime) {
-		burnTimeCounter = burnTime;
-		canCatchFire = false;
-		name = "Burn  ";
+		timer = burnTime;
+		canChangeStates = false;
 	}
 	
+	// Deincrement burnTimeCounter by one each step 
 	@Override
 	public void updateState(Cell[] neighbors, int burnTime, double spreadProbability) {
-		burnTimeCounter--;
-	}
-	
-	// This cell is on fire and can catch other cells on fire
-	@Override
-	public boolean canSpreadFire() {
-		return true;
-	}
-	
-	@Override
-	public Color getCellColor() {
-		return color;
+		timer--;
 	}
 	
 }
