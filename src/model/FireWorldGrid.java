@@ -1,9 +1,9 @@
 package model;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
-
-import controller.InitializeCellStates;
 
 
 /* 
@@ -19,7 +19,7 @@ import controller.InitializeCellStates;
 
 public class FireWorldGrid extends Grid {
 	
-	public static final int EDGE_CELL = 0;
+	
 	public static final int EMPTY_CELL = 1;
 	public static final int LIVE_TREE_CELL = 2;
 	public static final int BURNING_TREE_CELL = 3;
@@ -29,6 +29,8 @@ public class FireWorldGrid extends Grid {
     private int initialBurningTrees;
     private int burnTime;
     private double spreadProbability;
+    private LiveTreeCell liveTreeCell;
+    private HashMap<String,BurningTreeCell> burnMap = new HashMap<String,BurningTreeCell>();
 	
 	public FireWorldGrid(int numRows, int numCols) {
 		super(numRows, numCols);
@@ -51,7 +53,7 @@ public class FireWorldGrid extends Grid {
 	// Initializes Grid calling helper methods
 	@Override
     public void initializeGrid() {
-        cells = new Cell[numRows][numCols];
+        cells = new int[numRows][numCols];
         Random random = new Random();
         
         addEdgeCells();
@@ -65,9 +67,9 @@ public class FireWorldGrid extends Grid {
             for (int j = 0; j < numCols; j++) {
             	if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
             		if (random.nextDouble() < forestDensity) {
-                        cells[i][j] = new LiveTreeCell();
+                        cells[i][j] = LIVE_TREE_CELL;
                     } else {
-                        cells[i][j] = new UnchangingCell();
+                        cells[i][j] = EMPTY_CELL;
                     }
             	}
             }
@@ -77,16 +79,18 @@ public class FireWorldGrid extends Grid {
 	// Updates one step of the grid
 	@Override
     public void updateGrid() {
-        Cell[][] newCells = new Cell[numRows][numCols];
+		ArrayList<String> newBurns = new ArrayList<String>();
+        int[][] newCells = new int[numRows][numCols];
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
-                Cell currentCell = cells[i][j];
+                int currentCell = cells[i][j];
                 newCells[i][j] = currentCell;
                 if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
-                	Cell[] neighbors = getNeighbors(i, j);
-                    currentCell.updateState(neighbors, burnTime, spreadProbability);
-                    updateLiveToBurn(currentCell, newCells, i, j);
-                    updateBurnToBurntDown(currentCell, newCells, i, j);
+                    updateLiveToBurn(currentCell, newCells, i, j, newBurns);
+                    if (!newBurns.contains(i+","+j)) {
+                    	updateBurnToBurntDown(newCells, i, j);
+                    }
+                    newBurns.remove(i+","+j);
                 }
             }
         }
@@ -99,8 +103,9 @@ public class FireWorldGrid extends Grid {
     	int col = random.nextInt(numCols);
     	int burningTrees = initialBurningTrees;
     	while (burningTrees > 0) {
-    		if (cells[row][col].canChangeStates()) {
-    			cells[row][col] = new BurningTreeCell(burnTime);
+    		if (cells[row][col]==LIVE_TREE_CELL) {
+    			cells[row][col] = BURNING_TREE_CELL;
+    			burnMap.put(row+","+col, new BurningTreeCell(burnTime));
     			burningTrees--;
     		}
     		row = random.nextInt(numRows);
@@ -109,16 +114,30 @@ public class FireWorldGrid extends Grid {
     }
     
     // Updates Live trees to burn if they catch fire
-    private void updateLiveToBurn(Cell cell, Cell[][] newCells, int i, int j) {
-    	if (cell.getTimer() == burnTime) {
-    		newCells[i][j] = new BurningTreeCell(burnTime);
+    private void updateLiveToBurn(int cell, int[][] newCells, int i, int j, ArrayList<String> newBurns) {
+    	if (cell==LIVE_TREE_CELL) {
+    		int[] neighbors = getNeighbors(i, j);
+    		liveTreeCell = new LiveTreeCell();
+            liveTreeCell.updateState(neighbors, burnTime, spreadProbability);
+            if (liveTreeCell.getTimer() == burnTime) {
+            	newCells[i][j] = BURNING_TREE_CELL;
+            	newBurns.add(i+","+j);
+            	burnMap.put(i+","+j, new BurningTreeCell(burnTime));
+            }
     	}
     }
     
     // Updates burning trees to burn down if their burn timer expires
-    private void updateBurnToBurntDown(Cell cell, Cell[][] newCells, int i, int j) {
-    	if (cell.getTimer() == 0 && !cell.canChangeStates()) {
-    		newCells[i][j] = new UnchangingCell();
+    private void updateBurnToBurntDown(int[][] newCells, int i, int j) {
+    	BurningTreeCell current = burnMap.get(i+","+j);
+    	if (current != null) {
+    		int[] neighbors = getNeighbors(i, j);
+    		current.updateState(neighbors, i, i);
+    		burnMap.put(i+","+j, current);
+    		if (current.getTimer() == 0) {
+	    		newCells[i][j] = BURNT_TREE_CELL;
+	    		burnMap.remove(i+","+j);
+    		}
     	}
     }
 }

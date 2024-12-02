@@ -1,6 +1,5 @@
 package model;
 
-import javafx.scene.paint.Color;
 
 /* 
  * 
@@ -23,17 +22,14 @@ public class LiveTreeCell extends ChangingCell {
 
 	// Initialize burnTimeCounter if tree catches on fire 
 	@Override
-	public void updateState(Cell[] neighbors, int burnTime, double spreadProbability) {
-		for (Cell neighbor : neighbors) {
-			if (neighbor instanceof BurningTreeCell && Math.random() < spreadProbability) {
+	public void updateState(int[] neighbors, int burnTime, double spreadProbability) {
+		for (int neighbor : neighbors) {
+			if (neighbor == FireWorldGrid.BURNING_TREE_CELL && Math.random() < spreadProbability) {
 				timer = burnTime;
 			}
 		}
 	}
-
-	@Override
-	public Color getColor() {
-		return Color.GREEN;
-	}
+	
+	
 
 }

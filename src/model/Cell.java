@@ -18,7 +18,7 @@ public abstract class Cell {
 	
 	public abstract boolean canChangeStates();
 	public abstract int getTimer();
-	public abstract void updateState(Cell[] neighbors, int timer, double probability);
-	public abstract Color getColor();
+	public abstract void updateState(int[] neighbors, int timer, double probability);
+	
 	
 }

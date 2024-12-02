@@ -29,13 +29,9 @@ public class UnchangingCell extends Cell{
 		return canChangeStates;
 	}
 
-	public void updateState(Cell[] neighbors, int timer, double probability) {
+	public void updateState(int[] neighbors, int timer, double probability) {
 
 	}
 
-	@Override
-	public Color getColor() {
-		return Color.BLACK;
-	}
 
 }
