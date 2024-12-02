@@ -8,6 +8,7 @@ package model;
  * 
  * */
 
+import javafx.scene.paint.Color;
 
 public class SharkCell extends ChangingCell {
 	
@@ -44,4 +45,8 @@ public class SharkCell extends ChangingCell {
 	public int getStarveTime() {
 		return starveTime;
 	}
+	
+	public Color getColor() {
+        return Color.GRAY;
+    }
 }
