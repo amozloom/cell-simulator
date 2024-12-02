@@ -23,13 +23,9 @@ public class BurningTreeCell extends LiveTreeCell{
 
 	// Deincrement burnTimeCounter by one each step 
 	@Override
-	public void updateState(Cell[] neighbors, int burnTime, double spreadProbability) {
+	public void updateState(int[] neighbors, int burnTime, double spreadProbability) {
 		timer--;
 	}
 
-	@Override
-	public Color getColor() {
-		return Color.RED;
-	}
 
 }

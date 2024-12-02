@@ -19,11 +19,11 @@ import controller.InitializeGridStates;
 
 public abstract class Grid {
 	
-	
+	public static final int EDGE_CELL = 0;
 	private final int EDGE_ROWS = 2;
 	private final int EDGE_COLS = 2;
 	
-    protected Cell[][] cells;
+    protected int[][] cells;
     protected int numRows;
     protected int numCols;
 
@@ -45,15 +45,15 @@ public abstract class Grid {
     	for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
                 if (i == 0 || j == 0 || i == numRows - 1 || j == numCols - 1) {
-                    cells[i][j] = new UnchangingCell();
+                    cells[i][j] = EDGE_CELL;
                 }
             }
     	}
     }
 
     // Gets neighboring cells to update the grid each state
-    protected Cell[] getNeighbors(int row, int col) {
-        return new Cell[]{
+    protected int[] getNeighbors(int row, int col) {
+        return new int[]{
             cells[row - 1][col],
             cells[row + 1][col],
             cells[row][col - 1],
@@ -62,29 +62,18 @@ public abstract class Grid {
     }
 
     // Returns grid 
-    public Cell[][] getCells() {
+    public int[][] getCells() {
         return cells;
     }
     
     // Returns a cell from the grid
-    public Cell getCell(int row, int col) {
+    public int getCell(int row, int col) {
     	return cells[row][col];
     }
     
     // Resets grid with current parameters
     public void resetGrid() {
     	initializeGrid();
-    }
-    
-    // Prints grid for testing
-    public void printGrid() {
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numCols; j++) {
-                System.out.print(cells[i][j].getClass().getSimpleName() + " ");
-            }
-            System.out.println();
-        }
-        System.out.println(); // Extra line for readability between updates
     }
     
     // Methods to get size of grid 
