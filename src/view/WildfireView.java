@@ -15,7 +15,7 @@ import model.Grid;
 
 import java.awt.Button;
 
-import controller.ColorCells;
+import controller.ColorCellsForWildfire;
 import controller.ControlSimulationStates;
 
 import controller.InitializeGridStates;
@@ -51,7 +51,7 @@ public class WildfireView extends SimulationView {
 		InitializeGridStates initialStates = new InitializeGridStates();
 
 		simulationControls = new ControlSimulationStates();
-		colorCells = new ColorCells();
+		colorCells = new ColorCellsForWildfire();
 		//Initialize grid with defaults.
 
 		grid = new FireWorldGrid(initialStates.getNumberOfRows(),

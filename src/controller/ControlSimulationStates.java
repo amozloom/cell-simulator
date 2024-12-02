@@ -15,7 +15,7 @@ public class ControlSimulationStates {
 	
 	private int cycleCounter;
 	private boolean paused;
-	private ColorCells colorCells = new ColorCells();
+	private ColorCellsForWildfire colorCells = new ColorCellsForWildfire();
 	
 	//set the control simulation to paused as default
 	public ControlSimulationStates() {

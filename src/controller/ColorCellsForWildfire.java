@@ -17,7 +17,7 @@ import model.Grid;
  * */
 
 
-public class ColorCells {
+public class ColorCellsForWildfire {
     private final int CELL_SIZE = 40;
     private Group root;
     
@@ -32,7 +32,7 @@ public class ColorCells {
 	
 	private HashMap<Integer, Color> cellColors;
 	
-	public ColorCells() {
+	public ColorCellsForWildfire() {
 		cellColors = createCellColorMap();
 	}
     
