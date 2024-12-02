@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.FireWorldGrid;
 import model.Grid;
 import controller.ControlSimulationStates;
 import controller.InitializeGridStates;
@@ -32,7 +33,7 @@ public class WildfireView extends Application {
 	private boolean paused = true;
 	private Button pauseButton;
 	private ColorCells colorCells;
-	private Grid grid;
+	private FireWorldGrid grid;
 	private ControlSimulationStates simulationControls;
 	//Inputs
 	private TextField rowsField;
@@ -49,7 +50,7 @@ public class WildfireView extends Application {
 		simulationControls = new ControlSimulationStates();
 		colorCells = new ColorCells();
 		//Initialize grid with defaults.
-		grid = new Grid(initialStates.getNumberOfRows(),
+		grid = new FireWorldGrid(initialStates.getNumberOfRows(),
 				initialStates.getNumberOfColumns(),
 				initialStates.getBurnTime(),
 				initialStates.getSpreadProbability(),
@@ -152,7 +153,7 @@ public class WildfireView extends Application {
 		double forestDensity = Double.parseDouble(forestDensityField.getText());
 		int burningTrees = Integer.parseInt(burningTreesField.getText());
 
-		grid = new Grid(rows, cols, burnTime, spreadProb, forestDensity, burningTrees);
+		grid = new FireWorldGrid(rows, cols, burnTime, spreadProb, forestDensity, burningTrees);
 		redraw();
 	}
 	

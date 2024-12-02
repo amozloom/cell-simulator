@@ -3,7 +3,8 @@ package model;
 
 import java.util.Random;
 
-import controller.InitializeCellStates;
+
+//import controller.InitializeCellStates;
 
 
 /* 
