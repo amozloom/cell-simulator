@@ -1,6 +1,7 @@
 package view;
 
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -11,6 +12,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.FireWorldGrid;
 import model.Grid;
+
+import java.awt.Button;
+
+import controller.ColorCells;
 import controller.ControlSimulationStates;
 
 import controller.InitializeGridStates;
@@ -18,7 +23,7 @@ import model.FireWorldGrid;
 
 /* 
  * 
- * @author Reed Gatfield
+ * @author Reed Gatfield, Quincy Oldland
  * 
  * This class represents the Wilfire view.
  * 
@@ -27,20 +32,11 @@ import model.FireWorldGrid;
 
 public class WildfireView extends SimulationView {
 
-//Reed Gatfield
-//Quincy Oldland
-public class WildfireView extends Application {
 	//GUI
 	private final int MILLISECOND_DELAY = 2000;
 	private final int WINDOW_WIDTH = 800;
 	private final int WINDOW_HEIGHT = 600;
-	//FX and Simulation
-	private Scene myScene;
-	private boolean paused = true;
-	private Button pauseButton;
-	private ColorCells colorCells;
-	private FireWorldGrid grid;
-	private ControlSimulationStates simulationControls;
+	
 	//Inputs
 	private TextField rowsField;
 	private TextField colsField;

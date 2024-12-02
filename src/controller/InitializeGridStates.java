@@ -3,7 +3,14 @@ package controller;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-//Quincy Oldland
+/* 
+ * 
+ * @author Reed Gatfield, Quincy Oldland
+ * 
+ * Class is used to gather user inputs and give the simulation those attributes 
+ * 
+ * */
+
 
 public class InitializeGridStates {
 	//Scanner to allow for user inputs

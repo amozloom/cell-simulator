@@ -13,12 +13,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.FireWorldGrid;
 import model.Grid;
+import controller.ColorCells;
 import controller.ControlSimulationStates;
 
 /* 
  * 
- * @author Reed Gatfield
+ * @author Reed Gatfield, Quincy Oldland
  * 
  * Abstract class for simmulation views.
  * 
@@ -41,6 +43,11 @@ public abstract class SimulationView extends Application {
     //Basic inputs all simulations need
     protected TextField rowsField;
     protected TextField colsField;
+    
+    public SimulationView() {
+    	initializeGrid();
+    }
+    
 
     @Override
     public void start(Stage stage) {

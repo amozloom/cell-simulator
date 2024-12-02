@@ -1,10 +1,16 @@
 package controller;
 
 import model.Grid;
-import view.ColorCells;
 
 
-//simple controller class to manipulate grids behavior
+/* 
+ * 
+ * @author Quincy Oldland
+ * 
+ * simple class used to pause and unpause game
+ * 
+ * */
+
 public class ControlSimulationStates {
 	
 	private int cycleCounter;
