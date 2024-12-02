@@ -14,34 +14,10 @@ import javafx.scene.paint.Color;
 
 public abstract class Cell {
 	
-	protected int burnTimeCounter;
-	protected boolean canCatchFire;
-	protected String name; // Testing purpose only
+	protected boolean canChangeStates;
 	
-	protected Color color;
+	public abstract boolean canChangeStates();
+	public abstract int getTimer();
+	public abstract void updateState(Cell[] neighbors, int timer, double probability);
 	
-	
-	public Cell() {
-		this.burnTimeCounter = 0;
-	}
-	
-	// Gets burn time of a cell 
-	public int getBurnTime() {
-		return burnTimeCounter;
-	}
-	
-	// Determines if a cell can catch fire or not
-	public boolean canCatchFire() {
-		return canCatchFire;
-	}
-	
-	// Testing method 
-	public String getName() {
-		return name;
-	}
-	
-	
-	public abstract void updateState(Cell[] neighbors, int burnTime, double spreadProbability);
-	public abstract boolean canSpreadFire();
-	public abstract Color getCellColor();
 }
