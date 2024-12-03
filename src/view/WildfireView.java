@@ -18,7 +18,7 @@ import java.awt.Button;
 import controller.ColorCellsForWildfire;
 import controller.ControlSimulationStates;
 
-import controller.InitializeGridStates;
+import controller.InitializeGridStatesWildFire;
 import model.FireWorldGrid;
 
 /* 
@@ -48,7 +48,7 @@ public class WildfireView extends SimulationView {
 
 	@Override
 	protected void initializeGrid() {
-		InitializeGridStates initialStates = new InitializeGridStates();
+		InitializeGridStatesWildFire initialStates = new InitializeGridStatesWildFire();
 
 		simulationControls = new ControlSimulationStates();
 		colorCells = new ColorCellsForWildfire();

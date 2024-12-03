@@ -12,7 +12,7 @@ import java.util.Scanner;
  * */
 
 
-public class InitializeGridStates {
+public class InitializeGridStatesWildFire {
 	//Scanner to allow for user inputs
 	private Scanner scanner;
 	//Cell state variables 
@@ -25,7 +25,7 @@ public class InitializeGridStates {
 	private int numCols;
 	
 	
-	public InitializeGridStates() {
+	public InitializeGridStatesWildFire() {
 		this.burnTime = 1;
 		this.spreadProbability = 0.4;
 		this.forestDensity = 1;
